@@ -6,6 +6,8 @@ TEST = test
 OPEN = open
 NODE = node
 BASH = bash
+CF_CLI = cf
+PUSH = push
 
 PACKAGE_FLAGS = -y
 
@@ -32,3 +34,6 @@ clean:
 
 package/install:
 	$(PACKAGE) $(INSTALL) $(PACKAGE_FLAGS)
+
+deploy: all
+	$(CF_CLI) $(PUSH)
