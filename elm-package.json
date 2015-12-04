@@ -1,0 +1,16 @@
+{
+    "version": "1.0.0",
+    "summary": "The awesomest game that ever was",
+    "repository": "https://github.com/chendrix/awesome-game.git",
+    "license": "MIT",
+    "source-directories": [
+        "src",
+        "test"
+    ],
+    "exposed-modules": [],
+    "dependencies": {
+        "chendrix/elm-matrix": "3.1.0 <= v < 4.0.0",
+        "elm-lang/core": "3.0.0 <= v < 4.0.0"
+    },
+    "elm-version": "0.16.0 <= v < 0.17.0"
+}

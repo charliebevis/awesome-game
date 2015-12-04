@@ -1,0 +1,9 @@
+{
+    "name": "Awesome Game in Elm",
+    "repository": "https://github.com/chendrix/awesome-game",
+    "env": {
+        "BUILDPACK_URL": "https://github.com/srid/heroku-buildpack-elm.git",
+        "ELM_COMPILE": "make",
+        "ELM_STATIC_DIR": "."
+    }
+}
