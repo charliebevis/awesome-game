@@ -1,23 +1,23 @@
-module Awesome.Random 
+module Awesome.Random
   ( picture
   , block
   ) where
-    
+
 import Awesome.Model exposing (Block(..), Picture)
 import Random exposing (..)
 import Matrix.Random
 
 between i (x, y) =
   i >= x && i < y
-  
+
 picture : Generator Picture
 picture =
-  Matrix.Random.matrix 
-    (int 3 4) 
+  Matrix.Random.matrix
+    (int 3 4)
     (int 3 4)
     element
-  
-element : Random.Generator (Maybe Block)
+
+element : Generator (Maybe Block)
 element =
   map2 (\isEmpty b ->
     if isEmpty `between` (0, 40) then
@@ -25,10 +25,10 @@ element =
     else
       Just b
   ) (int 1 100) block
-    
+
 block : Generator Block
 block =
-  map (\i -> 
+  map (\i ->
     if i `between` (0, 20) then
       Blue
     else

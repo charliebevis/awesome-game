@@ -1,4 +1,4 @@
-module Awesome.View 
+module Awesome.View
   ( view
   , viewPicture
   ) where
@@ -13,6 +13,8 @@ import Text
 import List exposing (..)
 import Matrix
 
+
+view : List Picture -> Element
 view pictures =
   pictures
   |> map viewPicture
@@ -22,24 +24,22 @@ view pictures =
 viewPicture : Picture -> Element
 viewPicture picture =
   Matrix.map (\block ->
-    Maybe.map box block 
+    Maybe.map box block
     |> Maybe.withDefault empty
   ) picture
   |> Matrix.toList
   |> List.map (flow right)
   |> flow down
 
-  
+
 boxSize : Int
-boxSize = 20
+boxSize = 80
 
 
 spacer : Element
-spacer =
-  [empty, empty, empty, empty]
-  |> flow right
-  
-  
+spacer = empty
+
+
 empty : Element
 empty =
   let
@@ -47,7 +47,7 @@ empty =
     innerColor = C.white
   in
     collage boxSize boxSize [filled innerColor s]
-    
+
 
 box : Block -> Element
 box block =
