@@ -6,7 +6,7 @@ import Awesome.Random
 import Awesome.Model exposing (..)
 import Awesome.View exposing (..)
 import Time
-
+import Mouse
 
 main =
   Signal.map view gameState
@@ -14,11 +14,11 @@ main =
 
 gameState : Signal.Signal (List Picture)
 gameState =
-  Signal.map samplePictures (Time.every Time.second)
+  Signal.map samplePictures (Time.timestamp Mouse.isDown)
 
 
-samplePictures : Time.Time -> List Picture
-samplePictures t =
+samplePictures : (Time.Time, Bool) -> List Picture
+samplePictures (t, _) =
   let
     sec = Time.inSeconds t |> floor
     seed = Random.initialSeed sec    
