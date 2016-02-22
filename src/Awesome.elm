@@ -14,14 +14,15 @@ main =
 
 gameState : Signal.Signal (List Picture)
 gameState =
-  Signal.map samplePictures (Time.timestamp Mouse.isDown)
+  Signal.map samplePictures countClick
 
+countClick : Signal Int
+countClick = Signal.foldp (\click count -> count + 1) 0 Mouse.clicks
 
-samplePictures : (Time.Time, Bool) -> List Picture
-samplePictures (t, _) =
+samplePictures : Int -> List Picture
+samplePictures i =
   let
-    sec = Time.inSeconds t |> floor
-    seed = Random.initialSeed sec    
+    seed = Random.initialSeed i
     (p, seed') = Random.generate (Random.list 10 Awesome.Random.picture) seed
   in
     p
