@@ -42,8 +42,15 @@ generatePictures t =
 
 update : Input -> GameState -> GameState
 update input gs =
+
   let
-    newPictures = generatePictures (input.pressed |> fst)
+    (time, key) = input.pressed
+    newPictures =
+      if (Char.fromCode key == 'r')
+      then
+        generatePictures time
+      else
+        gs.availablePictures
   in
     { gs |
       availablePictures = newPictures
