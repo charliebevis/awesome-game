@@ -17,3 +17,8 @@ type alias Picture = Matrix (Maybe Block)
 
 allBlocks : List Block
 allBlocks = [Black, White, Blue, Yellow, Red]
+
+type alias GameState =
+  { chosenPictures : List Picture
+  , availablePictures : List Picture
+  }

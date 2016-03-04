@@ -7,8 +7,10 @@ import Awesome.Model exposing (Block(..), Picture)
 import Random exposing (..)
 import Matrix.Random
 
+
 between i (x, y) =
   i >= x && i < y
+
 
 picture : Generator Picture
 picture =
@@ -16,6 +18,7 @@ picture =
     (int 3 4)
     (int 3 4)
     element
+    
 
 element : Generator (Maybe Block)
 element =
@@ -25,6 +28,7 @@ element =
     else
       Just b
   ) (int 1 100) block
+
 
 block : Generator Block
 block =

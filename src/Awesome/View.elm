@@ -1,9 +1,8 @@
 module Awesome.View
-  ( view
-  , viewPicture
+  ( viewGame
   ) where
 
-import Awesome.Model exposing (Block, Picture)
+import Awesome.Model exposing (Block, Picture, GameState)
 import Awesome.Color as C exposing (..)
 
 import Graphics.Collage exposing (..)
@@ -14,12 +13,38 @@ import List exposing (..)
 import Matrix
 
 
+
+viewGame : GameState -> Element
+viewGame ({chosenPictures, availablePictures} as game) =
+  view availablePictures
+
 view : List Picture -> Element
 view pictures =
   pictures
   |> map viewPicture
+  |> indexedMap prependNumber
   |> intersperse spacer
   |> flow down
+
+
+prependNumber : Int -> Element -> Element
+prependNumber number el =
+  flow right [viewNumber number, el]
+
+
+viewNumber : Int -> Element
+viewNumber n =
+  let
+    text = Text.fromString <| toString n
+    d = Text.defaultStyle
+    style = { d |
+        height = Just 40
+      }
+
+  in
+    centered <| Text.style style text
+
+
 
 viewPicture : Picture -> Element
 viewPicture picture =
@@ -59,6 +84,7 @@ box block =
     border = outlined (solid borderColor) s
   in
     collage boxSize boxSize [inside, border]
+
 
 txt str =
   Text.fromString str
