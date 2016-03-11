@@ -16,15 +16,31 @@ import Matrix
 
 viewGame : GameState -> Element
 viewGame ({chosenPictures, availablePictures} as game) =
-  view availablePictures
+  let
+    available = viewAvailable availablePictures
+    chosen = viewChosen chosenPictures
+  in
+    [ available
+    , spacer
+    , chosen
+    ]
+      |> flow down
 
-view : List Picture -> Element
-view pictures =
+viewAvailable : List Picture -> Element
+viewAvailable pictures =
   pictures
   |> map viewPicture
   |> indexedMap prependNumber
   |> intersperse spacer
-  |> flow down
+  |> flow right
+
+
+viewChosen : List Picture -> Element
+viewChosen pictures =
+  pictures
+  |> map viewPicture
+  |> intersperse spacer
+  |> flow left
 
 
 prependNumber : Int -> Element -> Element
@@ -58,7 +74,7 @@ viewPicture picture =
 
 
 boxSize : Int
-boxSize = 80
+boxSize = 40
 
 
 spacer : Element
