@@ -1,5 +1,6 @@
 module Awesome where
 
+import Storage
 import Signal exposing (..)
 import Random
 import Awesome.Random
@@ -25,6 +26,16 @@ main =
   in
     Signal.map viewGame gameSignal
 
+
+gameMailbox : Signal.Mailbox GameState
+gameMailbox = Signal.mailbox newGame
+
+getGameFromStorage : Maybe GameState
+
+port fetchSavedGame :  Task String ()
+port fetchSavedGame =
+  getGameFromStorage
+  `andThen` \val -> send gameMailbox.address val
 
 newGame : GameState
 newGame =
